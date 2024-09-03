@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Water Usage</title>
+    <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase.js"></script>
+    <script>
+        var firebaseConfig = {
+            apiKey: "your-api-key",
+            authDomain: "your-project-id.firebaseapp.com",
+            databaseURL: "https://your-database-name.firebaseio.com",
+            projectId: "your-project-id",
+            storageBucket: "your-project-id.appspot.com",
+            messagingSenderId: "your-sender-id",
+            appId: "your-app-id"
+        };
+        firebase.initializeApp(firebaseConfig);
+
+        var database = firebase.database();
+
+        function getWaterUsage() {
+            database.ref('/waterUsage').on('value', (snapshot) => {
+                document.getElementById('usage').innerText = snapshot.val() + ' Liters';
+            });
+        }
+
+        window.onload = getWaterUsage;
+    </script>
+</head>
+<body>
+    <h1>Water Usage</h1>
+    <p id="usage">Loading...</p>
+</body>
+</html>
